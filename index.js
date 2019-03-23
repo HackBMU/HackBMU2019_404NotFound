@@ -71,11 +71,11 @@ io.on('connection', function(socket) {
    		}
    		input += 'exit\n';
    		fs.writeFileSync('input.txt', input);
-   		var child = exec('python red_zone.py < input.txt', {maxBuffer: 1024 * 2}, function(err, stdout,stderr){
+   		var child = exec('python red_zone.py < input.txt', {maxBuffer: 1024 * 100}, function(err, stdout,stderr){
 			if(err) throw err;
 			if(stderr) console.log(stderr);
 			output = stdout.split(' ');
-			socket.emit('get_path_data', output[0], output[1]);
+			socket.emit('get_path_data', output[0]);
 			console.log(stdout)
 		})
    		console.log(stations);
