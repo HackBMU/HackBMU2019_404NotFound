@@ -124,6 +124,7 @@
           zoom: 7,
           center: { lat: 26.214396, lng: 78.0508112 }
         });
+        // var mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
         directionsDisplay.setMap(map);
         directionsDisplay.setPanel(document.getElementById("right-panel"));
 
@@ -152,28 +153,45 @@
           {
             origin: start,
             destination: end,
-            travelMode: "TRANSIT"
+            travelMode: "TRANSIT",
+            provideRouteAlternatives: true
           },
           function(response, status) {
             if (status === "OK") {
               console.log(response);
-              train_no = response["routes"]["0"]["legs"]["0"]["steps"]["0"][
-                "transit"
-              ]["line"]["name"].split(" - ")[0];
-              console.log(train_no);
-              socket.emit(
-                "train_no",
-                train_no,
-                start.split(",")[0],
-                end.split(",")[0]
-              );
+              // train_no = response["routes"]["0"]["legs"]["0"]["steps"]["0"][
+              //   "transit"
+              // ]["line"]["name"].split(" - ")[0];
+              // console.log(train_no);
+              // socket.emit(
+              //   "train_no",
+              //   train_no,
+              //   start.split(",")[0],
+              //   end.split(",")[0]
+              // );
               // directionsDisplay = new google.maps.DirectionsRenderer({
               //   polylineOptions: {
               //     strokeColor: "red"
               //   }
               // });
               // console.log(response['routes']['0']['legs']['0']['steps']['0']['tran'])
-              directionsDisplay.setDirections(response);
+              // for (var i = 0, len = response.routes.length; i < len; i++) {
+              //   new google.maps.DirectionsRenderer({
+              //     map: map,
+              //     directions: response,
+              //     routeIndex: i
+              //   });
+              // }
+              var routes = [];
+              for (let i = 0; i < response.routes.length; i++)
+                routes.push(response.routes[i]);
+              console.log(routes);
+              for (let i = 0; i < routes.length; i++) {
+                response.routes = [routes[i]];
+                console.log(response);
+                console.log(routes[i]);
+                directionsDisplay.setDirections(response);
+              }
               // let right = $('.adp-substep');
               // console.log(right);
             } else {
