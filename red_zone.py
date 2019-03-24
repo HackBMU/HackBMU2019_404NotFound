@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 crime =pd.read_csv('01_District_wise_crimes_committed_IPC_2014.csv')
+crime['mean_crime']=crime[crime.columns[3:]].mean(axis=1)
 def zone(x):
     if (x["mean_crime"] >= 0) & (x["mean_crime"]<100):
         return 0

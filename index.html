@@ -108,7 +108,7 @@
         <option value="kolkata, in">Kolkata</option>
        
         <option value="mumbai, in">Mumbai</option>
-         <option value="chennai, in">Chennai</option>
+         <option value="agra, in">Agra</option>
       </select>
       <div id = "path_error"></div>
     </div>
@@ -152,7 +152,7 @@
 		  console.log(response);
             train_no = response['routes']['0']['legs']['0']['steps']['0']['transit']['line']['name'].split(' - ')[0]
             console.log(train_no);
-            socket.emit('train_no', train_no);
+            socket.emit('train_no', train_no, start.split(',')[0], end.split(',')[0]);
             // directionsDisplay = new google.maps.DirectionsRenderer({
             //   polylineOptions: {
             //     strokeColor: "red"

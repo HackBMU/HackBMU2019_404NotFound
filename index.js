@@ -33,7 +33,7 @@ function toTitleCase(str) {
             }
         );
     }
-function getTrain(trainNo, callback){
+function getTrain(trainNo,start, end, callback){
       request(`https://api.railwayapi.com/v2/route/train/${trainNo}/apikey/70bus84o7i/`, function(err, res){
         if(!err){
         	// console.log(res);
@@ -50,9 +50,25 @@ function getTrain(trainNo, callback){
         		stations.push(full_final_name)
         		// console.log(final_name);
         		// console.log(name);
+        	}final_stations = []
+        	for(let i = 0; i < stations.length; i++){
+        		f = false;
+        		console.log(stations[i], toTitleCase(end));
+        		if(stations[i] == toTitleCase(start)){
+        			// console.log(stations[i]);
+        			for(let j = i; j < stations.length; j++){
+        				if(stations[j] == toTitleCase(end)){
+        					f = true;
+        					break;
+        				}
+        				final_stations.push(stations[j]);
+        			}
+        			if(f) break;
+        		}
         	}
+        	callback(false, final_stations);
+        	return final_stations;
         	// console.log(stations);
-        	callback(false, stations);
         	// console.log(stations)
         }
       })
@@ -63,8 +79,9 @@ const io = require('socket.io')(hts);
 io.on('connection', function(socket) {
    console.log('A user connected');
 
-   socket.on('train_no', function(res){
-   	getTrain(res, function(error, stations){
+   socket.on('train_no', function(res, start, end){
+   	// console.log('train');
+   	getTrain(res,start,end, function(error, stations){
    		input = '';
    		for(let i = 0; i < stations.length; i++){
    			input += stations[i] + '\n';
