@@ -1,0 +1,12 @@
+Gwalior
+Jhansi
+Kanpur
+Allahabad
+Varansi
+Sasaram
+Aurangabad
+Gaya
+Dhanbad
+Durgapur
+Kolkata
+exit

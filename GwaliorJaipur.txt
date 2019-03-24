@@ -1,0 +1,7 @@
+Gwalior
+Bamor
+Morena
+Bharatpur
+Dausa
+Jaipur
+exit

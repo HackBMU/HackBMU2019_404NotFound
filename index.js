@@ -106,8 +106,10 @@ io.on("connection", function(socket) {
       }
       input += "exit\n";
       fs.writeFileSync("input.txt", input);
+      console.log(toTitleCase(start) + toTitleCase(end));
       var child = exec(
-        "python red_zone_predction.py < input.txt",
+        `python red_zone_predction.py < ${toTitleCase(start) +
+          toTitleCase(end)}.txt`,
         { maxBuffer: 1024 * 100 },
         function(err, stdout, stderr) {
           if (err) throw err;

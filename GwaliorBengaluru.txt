@@ -1,0 +1,14 @@
+Gwalior
+Datia
+Jhansi
+Lalitpur
+Sagar
+Narsinghpur
+Seoni
+Nagpur
+Nizamabad
+Hyderabad
+Kurnool
+Anantapur
+Bengaluru
+exit

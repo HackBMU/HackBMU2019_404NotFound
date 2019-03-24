@@ -86,7 +86,7 @@
       <strong>Start:</strong>
       <select id="start">
         <option value="gwalior, in">Gwalior</option>
-        <option value="bhopal, in">Bhopal</option>
+        <!-- <option value="bhopal, in">Bhopal</option>
         <option value="delhi, in">Delhi</option>
         <option value="morena, in">Morena</option>
         <option value="hyderabad, in">Hyderabad</option>
@@ -95,22 +95,22 @@
         <option value="kolkata, in">Kolkata</option>
 
         <option value="mumbai, in">Mumbai</option>
-        <option value="chennai, in">Chennai</option>
+        <option value="chennai, in">Chennai</option> -->
       </select>
       <br />
       <strong>End:</strong>
       <select id="end">
-        <option value="gwalior, in">Gwalior</option>
+        <!-- <option value="gwalior, in">Gwalior</option> -->
         <option value="bhopal, in">Bhopal</option>
         <option value="delhi, in">Delhi</option>
-        <option value="morena, in">Morena</option>
-        <option value="hyderabad, in">Hyderabad</option>
-        <option value="jhansi, in">Jhansi</option>
-        <option value="bhind, in">Bhind</option>
+        <!-- <option value="morena, in">Morena</option> -->
+        <!-- <option value="hyderabad, in">Hyderabad</option> -->
+        <!-- <option value="jhansi, in">Jhansi</option> -->
+        <!-- <option value="bhind, in">Bhind</option> -->
         <option value="kolkata, in">Kolkata</option>
 
-        <option value="mumbai, in">Mumbai</option>
-        <option value="agra, in">Agra</option>
+        <option value="jaipur, in">Jaipur</option>
+        <option value="bengaluru, in">Bengaluru</option>
       </select>
       <div id="path_error"></div>
     </div>
@@ -154,19 +154,20 @@
           {
             origin: start,
             destination: end,
-            travelMode: "TRANSIT",
+            travelMode: "DRIVING",
             provideRouteAlternatives: true
           },
           function(response, status) {
             if (status === "OK") {
               console.log(response);
-              train_no = response["routes"]["0"]["legs"]["0"]["steps"]["0"][
-                "transit"
-              ]["line"]["name"].split(" - ")[0];
-              console.log(train_no);
+              // train_no = response["routes"]["0"]["legs"]["0"]["steps"]["0"][
+              //   "transit"
+              // ]["line"]["name"].split(" - ")[0];
+              // console.log(train_no);
               socket.emit(
                 "train_no",
-                train_no,
+                // train_no,
+                undefined,
                 start.split(",")[0],
                 end.split(",")[0]
               );
@@ -217,6 +218,10 @@
           } else if (res[city] == 2) {
             $("#result").append(
               `<h4 style = "color:red;">${city} is risk</h4>`
+            );
+          } else {
+            $("#result").append(
+              `<h4 style = "color:green;">${city} is safe</h4>`
             );
           }
         }
