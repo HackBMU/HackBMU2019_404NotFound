@@ -116,6 +116,7 @@
     </div>
     <div id="right-panel" style="display: none;"></div>
     <div id="map"></div>
+    <center><div id="result"></div></center>
     <script>
       function initMap() {
         var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -159,16 +160,16 @@
           function(response, status) {
             if (status === "OK") {
               console.log(response);
-              // train_no = response["routes"]["0"]["legs"]["0"]["steps"]["0"][
-              //   "transit"
-              // ]["line"]["name"].split(" - ")[0];
-              // console.log(train_no);
-              // socket.emit(
-              //   "train_no",
-              //   train_no,
-              //   start.split(",")[0],
-              //   end.split(",")[0]
-              // );
+              train_no = response["routes"]["0"]["legs"]["0"]["steps"]["0"][
+                "transit"
+              ]["line"]["name"].split(" - ")[0];
+              console.log(train_no);
+              socket.emit(
+                "train_no",
+                train_no,
+                start.split(",")[0],
+                end.split(",")[0]
+              );
               // directionsDisplay = new google.maps.DirectionsRenderer({
               //   polylineOptions: {
               //     strokeColor: "red"
@@ -202,18 +203,38 @@
       }
       socket.on("get_path_data", function(res, safe) {
         console.log(res);
-        if (res == 0)
-          $("#path_error").html(
-            `<span style = "color:green">this path is safe <span>`
-          );
-        else if (res == 1)
-          $("#path_error").html(
-            `<span style = "color:yellow">this path is ${safe} %</span>`
-          );
-        else if (res == 2)
-          $("#path_error").html(
-            `<span style = "color:red">this path is unsafe</span>`
-          );
+        $("#result").html("");
+        // let predction = res.split(";");
+        for (let city in res) {
+          if (res[city] == 0) {
+            $("#result").append(
+              `<h4 style = "color:green;">${city} is safe</h4>`
+            );
+          } else if (res[city] == 1) {
+            $("#result").append(
+              `<h4 style = "color:#c38f14;">${city} is moderate safe</h4>`
+            );
+          } else if (res[city] == 2) {
+            $("#result").append(
+              `<h4 style = "color:red;">${city} is risk</h4>`
+            );
+          }
+        }
+        // for (let i = 0; i < predction.length; i++) {
+        //   let e = predction.split(" ");
+        //   // if (e[1] == 0)
+        //   // $("#path_error").html(
+        //   //   `<span style = "color:green">${e[0]} is safe<span>`
+        //   // );
+        //   if (e[1] == 1)
+        //     $("#path_error").html(
+        //       `<span style = "color:yellow">${e[0]}is not safe</span>`
+        //     );
+        //   else if (e[1] == 2)
+        //     $("#path_error").html(
+        //       `<span style = "color:yellow">${e[0]}is not safe</span>`
+        //     );
+        // }
         // console.log(res);
       });
     </script>

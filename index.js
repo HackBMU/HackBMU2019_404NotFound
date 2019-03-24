@@ -66,7 +66,7 @@ function getTrain(trainNo, start, end, callback) {
           }
         }
         for (let i = li; i < le + 1; i++) {
-          final_stations.push(stations[i]);
+          if (stations[i] != undefined) final_stations.push(stations[i]);
         }
         // for (let i = 0; i < stations.length; i++) {
         //   f = false;
@@ -98,7 +98,7 @@ io.on("connection", function(socket) {
   console.log("A user connected");
 
   socket.on("train_no", function(res, start, end) {
-    // console.log('train');
+    console.log("train");
     getTrain(res, start, end, function(error, stations) {
       input = "";
       for (let i = 0; i < stations.length; i++) {
@@ -107,13 +107,17 @@ io.on("connection", function(socket) {
       input += "exit\n";
       fs.writeFileSync("input.txt", input);
       var child = exec(
-        "python red_zone.py < input.txt",
+        "python red_zone_predction.py < input.txt",
         { maxBuffer: 1024 * 100 },
         function(err, stdout, stderr) {
           if (err) throw err;
           if (stderr) console.log(stderr);
-          output = stdout.split(" ");
-          socket.emit("get_path_data", output[0]);
+          output = stdout.split(";");
+          let final_output = {};
+          for (let i = 0; i < output.length - 1; i++) {
+            final_output[output[i].split(" ")[0]] = output[i].split(" ")[1];
+          }
+          socket.emit("get_path_data", final_output);
           console.log(stdout);
         }
       );

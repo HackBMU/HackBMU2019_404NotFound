@@ -18,15 +18,22 @@ crime = crime.assign(alert_zone=crime.apply(zone, axis=1))
 # Y = crime[crime.columns[92]]
 # model.fit(X,Y)
 s = []
+inputs = []
 while True:
     inp = input()
+    inputs.append(inp)
     if inp == 'exit':
         break
     s.append(crime.loc[crime['District'] == inp]['alert_zone'].values)
     
 k= pd.DataFrame(s)
 z= k[k.columns[0]]
-# for i in z:
-#     print(i)
+
+j = 0
 for i in z:
-    print(int(i), end=' ')
+    print(inputs[j] , i, end =';')
+    j += 1
+# for i in range(len(inputs)):
+#     print(inputs[i], int(z[i]), end = ' ')
+# for i in z:
+#     print(int(i), end=' ')

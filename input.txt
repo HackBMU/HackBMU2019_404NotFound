@@ -1,5 +1,50 @@
 Gwalior
+Dabra
+Datia
 Jhansi
-Lalitpur
-Bhopal
+Chirgaon
+Moth
+Ait
+Orai
+Kalpi
+Pokhrayan
+Lalpur
+Paman
+Bhimsen
+Govindpuri
+Kanpur Central
+Unnao
+Lucknow
+Barabanki
+Burhwal
+Colonelganj
+Gonda
+Mankapur
+Maskanwa
+Babhnan
+Basti
+Munderwa
+Khalilabad
+Gorakhpur
+Chauri Chaura
+Gauri Bazar
+Deoria Sadar
+Bhatni
+Bhatpar Rani
+Bankata
+Mairwa
+Siwan
+Duraundha
+Chhapra
+Dighwara
+Sonpur
+Hajipur
+Sarai
+Bhagwanpur
+Muzaffarpur
+Dholi
+Khudiram B Pusa
+Samastipur
+Dalsingh Sarai
+Barauni
 exit
