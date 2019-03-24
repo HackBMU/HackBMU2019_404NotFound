@@ -19,11 +19,11 @@ Y = crime[crime.columns[92]]
 model.fit(X,Y)
 s = []
 while True:
-    inp = input(">")
+    inp = input()
     if inp == 'exit':
         break
     s.append(crime.loc[crime['District'] == inp]['alert_zone'].values)
     
 k= pd.DataFrame(s)
 z=np.floor(k.sum(0)/len(k))
-print(z)
+print(int(z))

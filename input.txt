@@ -1,10 +1,5 @@
 Gwalior
 Jhansi
-Bhopal 
-Itarsi
-Nagpur
-Balharshah
-Warangal
-Vijayawada
-Chennai Central
+Lalitpur
+Bhopal
 exit
